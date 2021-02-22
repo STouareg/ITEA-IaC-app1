@@ -1,14 +1,14 @@
-- name: Lesson12
+- name: exam-iac
   gather_facts: false
   hosts: [all]
   become: yes
 
   tasks:
 
-    - name: Create lesson12
+    - name: Create exam-iac
       docker_container:
-        name: lesson12
-        image: sturyk/lesson12app1
+        name: exam-iac
+        image: sturyk/exam-iac
         pull: true
         state: started
         ports:

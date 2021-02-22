@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: sturyk/lesson12app1:latest
+          tags: sturyk/lexam-iac:latest
 
       -
         name: Image digest
