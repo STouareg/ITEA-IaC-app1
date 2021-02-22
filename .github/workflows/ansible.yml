@@ -29,19 +29,22 @@ jobs:
           workflow: terrafrom.yml
           workflow_conclusion: success
           name: terraform
-          repo: nlemeshko/lesson12
+          repo: sturyk/ITEA-IaC-test
 
       - id: host
         env:
           SSH: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-            host=$(grep "ec2_endpoint" terraform.log | awk -F  ":" '{print $1}' )
-            host=${host//'ec2_endpoint = "'}
-            host=${host//'"'}
-            echo $host >> ansible/hosts
+            host1=$(grep "ec2_endpoint-1" terraform.log | awk -F  ":" '{print $1}' )
+            host1=${host1//'ec2_endpoint-1 = "'}
+            host1=${host1//'"'}
+            echo 'ubuntu-ITEA-1 ansible_host='$host1 >> ansible/hosts    
+            host2=$(grep "ec2_endpoint-2" terraform.log | awk -F  ":" '{print $1}' )
+            host2=${host2//'ec2_endpoint-2 = "'}
+            host2=${host2//'"'}
+            echo 'ubuntu-ITEA-2 ansible_host='$host2 >> ansible/hosts    
             echo "$SSH" > ansible/key.pem
             chmod 400 ansible/key.pem
-            cat ansible/key.pem
 
       - name: Ansible
         uses: saubermacherag/ansible-playbook-docker-action@v1.3
