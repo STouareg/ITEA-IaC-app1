@@ -5,7 +5,7 @@
 
   tasks:
 
-    - name: Create exam-iac
+    - name: Create exam-iac container
       docker_container:
         name: exam-iac
         image: sturyk/exam-iac
